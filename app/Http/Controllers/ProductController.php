@@ -18,7 +18,7 @@ class ProductController extends Controller
         session(['current_page' => request('page')]);
 
         return view('product-list.index', [
-            'products' => Product::latest()->filter(request(['search']))->paginate(5)
+            'products' => Product::latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 

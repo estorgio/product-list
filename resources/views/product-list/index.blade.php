@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="col">
                     <div>
-                        {{ $products->links() }}
+                        {{ $products->onEachSide(1)->links() }}
                     </div>
                 </div>
             </div>

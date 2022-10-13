@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,21 +40,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'barcode' => 'required|unique:products,barcode',
-            'product-image' => File::image()
-                ->max(1024)
-                ->dimensions(
-                    Rule::dimensions()
-                        ->maxWidth(2000)
-                        ->maxHeight(2000)
-                )
-        ]);
+        $formFields = $request->validated();
 
         if ($request->hasFile('product-image')) {
             $formFields['image'] = $request->file('product-image')->store('product-images');
@@ -97,21 +86,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'barcode' => 'exclude_if:barcode,' . $product->barcode . '|required|unique:products,barcode',
-            'product-image' => File::image()
-                ->max(1024)
-                ->dimensions(
-                    Rule::dimensions()
-                        ->maxWidth(2000)
-                        ->maxHeight(2000)
-                )
-        ]);
+        $formFields = $request->validated();
 
         if ($request->hasFile('product-image')) {
             $formFields['image'] = $request->file('product-image')->store('product-images');

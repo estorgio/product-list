@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class ProductController extends Controller
 {
@@ -45,10 +46,17 @@ class ProductController extends Controller
             'price' => 'required',
             'quantity' => 'required',
             'barcode' => 'required|unique:products,barcode',
+            'product-image' => File::image()
+                ->max(1024)
+                ->dimensions(
+                    Rule::dimensions()
+                        ->maxWidth(2000)
+                        ->maxHeight(2000)
+                )
         ]);
 
-        if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('product-images');
+        if ($request->hasFile('product-image')) {
+            $formFields['image'] = $request->file('product-image')->store('product-images');
         }
 
         Product::create($formFields);
@@ -96,10 +104,17 @@ class ProductController extends Controller
             'price' => 'required',
             'quantity' => 'required',
             'barcode' => 'exclude_if:barcode,' . $product->barcode . '|required|unique:products,barcode',
+            'product-image' => File::image()
+                ->max(1024)
+                ->dimensions(
+                    Rule::dimensions()
+                        ->maxWidth(2000)
+                        ->maxHeight(2000)
+                )
         ]);
 
-        if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('product-images');
+        if ($request->hasFile('product-image')) {
+            $formFields['image'] = $request->file('product-image')->store('product-images');
         }
 
         $product->update($formFields);

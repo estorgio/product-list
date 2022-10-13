@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <form action="/products" method="POST">
+                    <form action="/products" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group @error('name') has-danger @enderror">
                             <label for="name" class="form-label mt-3">Product Name</label>
@@ -45,6 +45,14 @@
                             <input type="text" class="form-control @error('barcode') is-invalid @enderror"
                                 name="barcode" placeholder="" value="{{ old('barcode') }}">
                             @error('barcode')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group @error('image') has-danger @enderror">
+                            <label for="image" class="form-label mt-4">Product Image</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                            @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

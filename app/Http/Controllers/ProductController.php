@@ -47,6 +47,10 @@ class ProductController extends Controller
             'barcode' => 'required|unique:products,barcode',
         ]);
 
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('product-images');
+        }
+
         Product::create($formFields);
 
         return redirect('/')->with('message', 'New product has been added.');
@@ -93,6 +97,10 @@ class ProductController extends Controller
             'quantity' => 'required',
             'barcode' => 'exclude_if:barcode,' . $product->barcode . '|required|unique:products,barcode',
         ]);
+
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('product-images');
+        }
 
         $product->update($formFields);
 

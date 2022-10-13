@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'price', 'quantity', 'barcode'];
+    protected $fillable = ['name', 'price', 'quantity', 'barcode', 'image'];
 
     public function scopeFilter($query, array $filters)
     {

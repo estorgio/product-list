@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -16,13 +17,9 @@ class UserController extends Controller
         return view('users.signup');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $formFields = $request->validate([
-            'username' => 'required|min:4|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-        ]);
+        $formFields = $request->validated();
 
         $formFields['password'] = Hash::make($formFields['password']);
 

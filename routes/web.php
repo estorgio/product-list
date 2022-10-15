@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/products/create', [ProductController::class, 'create']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
+    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+    Route::post('/logout', [UserController::class, 'logout']);
+});
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [UserController::class, 'login'])
+        ->name('login');
+    Route::post('/login', [UserController::class, 'authenticate']);
+    Route::get('/signup', [UserController::class, 'signup']);
+    Route::post('/signup', [UserController::class, 'store']);
+});
+
 Route::get('/', [ProductController::class, 'index']);
-Route::get('/products/create', [ProductController::class, 'create']);
-Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
-Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
-Route::put('/products/{product}', [ProductController::class, 'update']);
-Route::delete('/products/{product}', [ProductController::class, 'destroy']);

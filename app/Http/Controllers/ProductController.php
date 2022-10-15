@@ -48,6 +48,8 @@ class ProductController extends Controller
             $formFields['image'] = $request->file('product-image')->store('product-images');
         }
 
+        $formFields['user_id'] = auth()->id();
+
         Product::create($formFields);
 
         return redirect('/')->with('message', 'New product has been added.');

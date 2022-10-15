@@ -29,7 +29,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        @auth
                         <a class="nav-link" href="/products/create">New Product</a>
+                        @endauth
                     </li>
                 </ul>
                 <form class="d-flex" method="GET" action="/">
@@ -37,6 +39,34 @@
                         value="{{ request('search') }}">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                @auth
+                <ul class="navbar-nav ms-lg-3">
+                    <li class="navbar-text mx-lg-2">
+                        <span>
+                            <i class="fa-solid fa-user"></i> {{ auth()->user()->username }}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        {{-- <a class="nav-link" href="/logout">Log out</a> --}}
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="btn btn-link text-decoration-none text-white">
+                                <i class="fa-solid fa-door-closed"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+                @else
+                <ul class="navbar-nav ms-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log In</a>
+                    </li>
+                </ul>
+                @endauth
+
             </div>
         </div>
     </nav>

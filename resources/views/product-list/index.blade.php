@@ -4,11 +4,13 @@
         </x-slot>
 
         <div class="container">
+            @auth
             <div class="row mb-4">
                 <div class="col">
                     <a href="/products/create" class="btn btn-primary">New Product</a>
                 </div>
             </div>
+            @endauth
 
             <div class="row mb-4">
                 <div class="col">
@@ -37,14 +39,14 @@
                                 <td>{{ $product->barcode }}</td>
                                 <td>
                                     <a href="/products/{{ $product->id }}/edit" class="text-decoration-none">
-                                        <button type="button" class="btn btn-link">
+                                        <button type="button" class="btn btn-link @guest disabled @endguest">
                                             <i class="fa-regular fa-pen-to-square"></i> Edit
                                         </button>
                                     </a>
                                     <form action="/products/{{ $product->id }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-link">
+                                        <button type="submit" class="btn btn-link @guest disabled @endguest">
                                             <i class="fa-solid fa-trash"></i> Delete
                                         </button>
                                     </form>

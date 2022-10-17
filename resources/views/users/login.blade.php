@@ -31,6 +31,14 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="1" name="remember_me"
+                                    id="remember_me">
+                                <label for="remember_me" class="form-check-label">Remember Me</label>
+                            </div>
+                        </div>
+
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
                         <hr class="my-4">
                         <small class="text-muted">Don't have account yet? <a href="/signup">Sign up!</a></small>

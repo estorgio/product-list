@@ -54,7 +54,7 @@
                         {{-- <a class="nav-link" href="/logout">Log out</a> --}}
                         <form method="POST" action="/logout">
                             @csrf
-                            <button type="submit" class="btn btn-link text-decoration-none text-white">
+                            <button type="submit" class="btn btn-link text-decoration-none text-white ps-0 ps-lg-3">
                                 <i class="fa-solid fa-door-closed"></i> Logout
                             </button>
                         </form>

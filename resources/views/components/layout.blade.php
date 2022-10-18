@@ -35,9 +35,13 @@
                     </li>
                 </ul>
                 <form class="d-flex" method="GET" action="/">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search for product..." name="search"
-                        value="{{ request('search') }}">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Search for product..." name="search"
+                            value="{{ request('search') }}">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
                 </form>
                 @auth
                 <ul class="navbar-nav ms-lg-3">

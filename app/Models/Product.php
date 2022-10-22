@@ -21,6 +21,14 @@ class Product extends Model
         }
     }
 
+    public function scopeSort($query, array $sort)
+    {
+        $field = $sort['field'] ?? 'created_at';
+        $order = $sort['order'] ?? 'desc';
+
+        $query->orderBy($field, $order);
+    }
+
     protected function createdAt(): Attribute
     {
         return Attribute::make(

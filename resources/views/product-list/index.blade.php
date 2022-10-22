@@ -17,11 +17,65 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Product Name</th>
-                                <th>Price (₱)</th>
-                                <th>Quantity</th>
-                                <th>Barcode</th>
+                                @php
+                                $sort_current_field = request()->query('field', 'created_at');
+                                $sort_current_order = request()->query('order', 'desc');
+
+                                $new_order = $sort_current_order === 'asc' ? 'desc' : 'asc';
+                                $fa_direction = $sort_current_order === 'asc' ? 'up' : 'down';
+
+                                $fields = [
+                                'id',
+                                'name',
+                                'price',
+                                'quantity',
+                                'barcode',
+                                ];
+
+                                $field_url = [];
+
+                                foreach ($fields as $field) {
+                                $field_url[$field] = request()->fullUrlWithQuery(['field' => $field, 'order' =>
+                                $new_order]);
+                                }
+
+                                @endphp
+                                <th>
+                                    <a href="{{ $field_url['id'] }}">
+                                        ID
+                                        @if ($sort_current_field === 'id')
+                                        <i class="fa-solid fa-sort-{{ $fa_direction }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ $field_url['name'] }}">Product Name
+                                        @if ($sort_current_field === 'name')
+                                        <i class="fa-solid fa-sort-{{ $fa_direction }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ $field_url['price'] }}">Price (₱)
+                                        @if ($sort_current_field === 'price')
+                                        <i class="fa-solid fa-sort-{{ $fa_direction }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ $field_url['quantity'] }}">Quantity
+                                        @if ($sort_current_field === 'quantity')
+                                        <i class="fa-solid fa-sort-{{ $fa_direction }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ $field_url['barcode'] }}">Barcode
+                                        @if ($sort_current_field === 'barcode')
+                                        <i class="fa-solid fa-sort-{{ $fa_direction }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
                                 <th>#</th>
                             </tr>
                         </thead>

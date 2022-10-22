@@ -17,8 +17,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        session(['current_page' => request('page')]);
-
         return view('product-list.index', [
             'products' => Product::filter(request(['search']))
                 ->sort(request(['field', 'order']))

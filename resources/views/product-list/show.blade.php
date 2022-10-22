@@ -62,7 +62,7 @@
                     @auth
                     <a href="/products/{{ $product->id }}/edit" class="btn btn-primary me-2">Edit Product</a>
                     @endauth
-                    <a href="/?page={{ session('current_page') }}" class="btn btn-secondary">Back</a>
+                    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>

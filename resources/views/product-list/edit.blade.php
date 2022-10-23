@@ -62,7 +62,7 @@
 
                         <div class="mt-4">
                             <input type="submit" value="Update Product" class="btn btn-primary me-2">
-                            <a href="/?page={{ session('current_page') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

@@ -29,16 +29,6 @@ class Product extends Model
         $query->orderBy($field, $order);
     }
 
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value) {
-                $timestamp = strtotime($value);
-                return date('F j, Y', $timestamp) . ' - ' . date('g:i A', $timestamp);
-            },
-        );
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

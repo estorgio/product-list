@@ -45,7 +45,7 @@
 
                             <div class="row mb-2">
                                 <div class="col"><strong>Date added:</strong></div>
-                                <div class="col">{{ $product->created_at }}</div>
+                                <div class="col">@format_time($product->created_at)</div>
                             </div>
 
                             <div class="row mb-2">

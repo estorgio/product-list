@@ -6,3 +6,6 @@ I made this app in order to learn how to implement common CRUD operations in Lar
 
 ## License
 MIT
+
+## Attribution
+Dairy products icons created by [Pixelmeetup - Flaticon](https://www.flaticon.com/free-icons/dairy-products).

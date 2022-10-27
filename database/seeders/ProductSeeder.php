@@ -24,8 +24,13 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::factory()
-            ->count(50)
             ->for($user)
-            ->create();
+            ->create([
+                'name' => 'Century Tuna Flakes in Oil',
+                'price' => 24.50,
+                'quantity' => 104,
+                'barcode' => '0123456789',
+                'image' => 'product-images/sample-1.jpg',
+            ]);
     }
 }

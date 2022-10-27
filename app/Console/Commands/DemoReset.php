@@ -32,7 +32,7 @@ class DemoReset extends Command
         Artisan::call('migrate:refresh --seed');
         Storage::deleteDirectory('product-images');
         Storage::makeDirectory('product-images');
-        Storage::copy('../assets/demo/sample-1.jpg', 'product-images/sample-1.jpg');
+        Storage::copy('demo/sample-1.jpg', 'product-images/sample-1.jpg');
 
         return Command::SUCCESS;
     }

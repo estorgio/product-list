@@ -49,11 +49,11 @@
                             @enderror
                         </div>
 
-                        <div class="form-group @error('product-image') has-danger @enderror">
-                            <label for="product-image" class="form-label mt-4">Product Image</label>
-                            <input type="file" class="form-control @error('product-image') is-invalid @enderror"
-                                name="product-image">
-                            @error('product-image')
+                        <div class="form-group @error('image') has-danger @enderror">
+                            <label for="image" class="form-label mt-4">Product Image</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                name="image">
+                            @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

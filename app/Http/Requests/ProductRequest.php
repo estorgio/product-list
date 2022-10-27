@@ -34,13 +34,20 @@ class ProductRequest extends FormRequest
             'barcode' =>  is_null($product)
                 ? 'required|unique:products,barcode'
                 : 'exclude_if:barcode,' . $product->barcode . '|required|unique:products,barcode',
-            'product-image' => File::image()
+            'image' => File::image()
                 ->max(1024)
                 ->dimensions(
                     Rule::dimensions()
                         ->maxWidth(2000)
                         ->maxHeight(2000)
                 )
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'image' => 'product image',
         ];
     }
 }

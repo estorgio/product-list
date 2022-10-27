@@ -42,8 +42,8 @@ class ProductController extends Controller
     {
         $formFields = $request->validated();
 
-        if ($request->hasFile('product-image')) {
-            $formFields['image'] = $request->file('product-image')->store('product-images');
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('product-images');
         }
 
         $formFields['user_id'] = auth()->id();
@@ -90,8 +90,8 @@ class ProductController extends Controller
     {
         $formFields = $request->validated();
 
-        if ($request->hasFile('product-image')) {
-            $formFields['image'] = $request->file('product-image')->store('product-images');
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('product-images');
         }
 
         $product->update($formFields);

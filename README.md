@@ -31,6 +31,10 @@ I made this app in order to learn how to implement common CRUD operations in Lar
   ```bash
   $ php artisan migrate
   ```
+- If you are using `/storage/app/public` directory for file uploads, create a symbolic link in `/public` folder to make it accessible.
+  ```bash
+  $ php artisan storage:link
+  ```
 
 ## License
 MIT

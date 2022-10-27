@@ -6,6 +6,32 @@ I made this app in order to learn how to implement common CRUD operations in Lar
 
 [Live Demo](https://product-list.estorgio.net)
 
+## Installation
+- Clone the repository
+  ```bash
+  $ git clone https://github.com/estorgio/product-list.git
+  ```
+- Install composer dependencies
+  ```bash
+  $ composer install --optimize-autoloader --no-dev
+  ```
+- Create a new `.env` file from the example file
+  ```bash
+  $ cp .env.example .env
+  ```
+- Generate a new `APP_KEY` value
+  ```bash
+  $ php artisan key:generate
+  ```
+- Edit `.env` file and set appropriate configurations for the app, database, mail, etc.
+  ```bash
+  $ nano .env
+  ```
+- Once the db credentials has been set, run the migration
+  ```bash
+  $ php artisan migrate
+  ```
+
 ## License
 MIT
 

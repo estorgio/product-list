@@ -29,7 +29,7 @@ class DemoReset extends Command
      */
     public function handle()
     {
-        Artisan::call('migrate:refresh --seed');
+        Artisan::call('migrate:refresh --force --seed');
         Storage::deleteDirectory('product-images');
         Storage::makeDirectory('product-images');
         Storage::copy('demo/sample-1.jpg', 'product-images/sample-1.jpg');

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products', [ProductController::class, 'store']);
     Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
@@ -34,3 +34,11 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
+
+Route::get('/verify-account', [UserController::class, 'require_verification'])
+    ->middleware('auth')
+    ->name('verification.notice');
+
+Route::get('/verify-account/{id}/{hash}', [UserController::class, 'verify_account'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');

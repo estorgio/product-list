@@ -80,6 +80,7 @@
     </nav>
 
     {{-- flash message here --}}
+    @include('partials.email-verify')
     @include('partials.flash-message')
 
     {{ $slot }}

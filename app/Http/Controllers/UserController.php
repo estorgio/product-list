@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
 {
@@ -25,9 +27,11 @@ class UserController extends Controller
 
         $user = User::create($formFields);
 
+        event(new Registered($user));
+
         auth()->login($user);
 
-        return redirect('/')->with('message', 'Welcome, ' . $user->username);
+        return redirect('/');
     }
 
     public function login()
@@ -61,5 +65,17 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login')->with('message', 'You have been logged out.');
+    }
+
+    public function require_verification()
+    {
+        return redirect('/');
+    }
+
+    public function verify_account(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+        return redirect('/')
+            ->with('message', 'Your email has been successfully verified.');
     }
 }

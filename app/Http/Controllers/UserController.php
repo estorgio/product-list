@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
@@ -77,5 +79,54 @@ class UserController extends Controller
         $request->fulfill();
         return redirect('/')
             ->with('message', 'Your email has been successfully verified.');
+    }
+
+    public function forgot_password_form()
+    {
+        return view('users.forgot-password');
+    }
+
+    public function email_password_reset_link(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? redirect()->route('login')->with('message', 'A password reset link has been sent to your email.')
+            : back()->with('message', 'An error occured while trying to send password reset link to your email.');
+    }
+
+    public function password_reset_form(Request $request, $token)
+    {
+        return view('users.reset-password', [
+            'token' => $token,
+            'email' => $request->query('email'),
+        ]);
+    }
+
+    public function reset_password(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->password = Hash::make($password);
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('message', 'Your password has been successfully changed.')
+            : back()->with('message', 'An error occured while trying to change your password.');
     }
 }

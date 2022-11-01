@@ -41,7 +41,8 @@
 
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
                         <hr class="my-4">
-                        <small class="text-muted">Don't have account yet? <a href="/signup">Sign up!</a></small>
+                        <small class="text-muted d-block">Don't have account yet? <a href="/signup">Sign up!</a></small>
+                        <small class="text-muted d-block"><a href="/forgot-password">Forgot Password?</a></small>
                     </form>
                 </div>
             </div>

@@ -42,3 +42,19 @@ Route::get('/verify-account', [UserController::class, 'require_verification'])
 Route::get('/verify-account/{id}/{hash}', [UserController::class, 'verify_account'])
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
+
+Route::get('/forgot-password', [UserController::class, 'forgot_password_form'])
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [UserController::class, 'email_password_reset_link'])
+    ->middleware('guest')
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', [UserController::class, 'password_reset_form'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [UserController::class, 'reset_password'])
+    ->middleware('guest')
+    ->name('password.update');

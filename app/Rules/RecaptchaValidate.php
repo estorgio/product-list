@@ -17,11 +17,6 @@ class RecaptchaValidate implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        // dd('Validator invoked!');
-        // $fail('halted for now: ' . $value);
-
-        // dd(config('recaptcha.secret_key'));
-
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => config('recaptcha.secret_key'),
             'response' => $value,

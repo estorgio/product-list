@@ -21,8 +21,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-    Route::post('/logout', [UserController::class, 'logout']);
 });
+
+Route::post('/logout', [UserController::class, 'logout'])
+    ->middleware('auth');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [UserController::class, 'login'])

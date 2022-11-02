@@ -44,6 +44,15 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mb-3 @error('g-recaptcha-response') has-validation @enderror">
+                            <div class="form-floating @error('g-recaptcha-response') is-invalid @enderror">
+                                @recaptcha_field
+                            </div>
+                            @error('g-recaptcha-response')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
                         <hr class="my-4">
                         <small class="text-muted">Already have an account? <a href="/login">Log In!</a></small>

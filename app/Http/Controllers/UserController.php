@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
@@ -86,9 +87,9 @@ class UserController extends Controller
         return view('users.forgot-password');
     }
 
-    public function email_password_reset_link(Request $request)
+    public function email_password_reset_link(ResetPasswordRequest $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validated();
 
         $status = Password::sendResetLink(
             $request->only('email')

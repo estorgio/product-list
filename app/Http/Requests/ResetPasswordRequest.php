@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Request;
 use App\Rules\RecaptchaValidate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +26,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|min:4|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
+            'email' => 'required|email',
             'g-recaptcha-response' => new RecaptchaValidate(),
         ];
     }
